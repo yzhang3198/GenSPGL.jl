@@ -371,9 +371,10 @@ function funCompositeR(A::TA,
     
     if ~(params["proxy"])
         g1 = funForward(A, x, -v, params)
-        g2 = [zero(eltype(g1))]
+        g2 = g1[:]
     else
-        g1,g2 = funForward(A, x, -v, params)
+        g1 = funForward(A, x, -v, params)
+	g2 = g1[:]
     end
 
     return f,g1,g2
@@ -686,9 +687,10 @@ function funCompositeR(A::Function,x::AbstractArray,r::AbstractArray,
     
     if ~(params["proxy"])
         g1 = funForward(A, x, -v, params)
-        g2 = zero(eltype(g1))
+        g2 = g1[:]
     else
-        g1,g2 = funForward(A, x, -v, params)
+        g1 = funForward(A, x, -v, params)
+	g2 = g1[:]
     end
 
     return f,g1,g2
